@@ -205,3 +205,22 @@ The test takes too long and times out.
 - First run may take 1-2 minutes to download images
 - Ensure you have at least 2GB RAM available
 - Run with verbose output to see progress: `go test -v ./...`
+
+### "fork/exec /tmp/go-buildxxxxx/xxx/exe/main: permission denied"
+
+`/tmp` is mounted with noexec, preventing go build to be done.
+
+**Solution**:
+- Use an alternative tmp directory for Go
+```bash
+# Create it
+mkdir ~/tmp
+```
+Add it to your environment by editing `~/.profile` or `~/.bashrc` :
+```bash
+export GOTMPDIR=~/tmp
+```
+Then reload your shell:
+```bash
+source ~/.profile  # or source ~/.bashrc
+```
